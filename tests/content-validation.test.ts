@@ -32,6 +32,12 @@ test("rejects an invalid social link", () => {
   assert.throws(() => validateContent(content), /profile\.socialLinks\[0\]\.href/);
 });
 
+test("rejects an incomplete business area", () => {
+  const content = contentFixture();
+  content.profile.businessAreas[0].focus = "";
+  assert.throws(() => validateContent(content), /profile\.businessAreas\[0\]\.focus/);
+});
+
 test("rejects duplicate case-study slugs", () => {
   const content = contentFixture();
   content.caseStudies[1].slug = content.caseStudies[0].slug;

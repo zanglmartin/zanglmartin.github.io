@@ -49,6 +49,14 @@ export function validateContent(content: PortfolioContent) {
   requireText(currentProfile.summary, "profile.summary");
   requireText(currentProfile.location, "profile.location");
 
+  if (!currentProfile.businessAreas.length) throw new Error("Missing portfolio content: profile.businessAreas");
+  currentProfile.businessAreas.forEach((area, index) => {
+    const label = `profile.businessAreas[${index}]`;
+    requireText(area.name, `${label}.name`);
+    requireText(area.focus, `${label}.focus`);
+    requireText(area.detail, `${label}.detail`);
+  });
+
   currentProfile.socialLinks.forEach((link, index) => {
     requireText(link.label, `profile.socialLinks[${index}].label`);
     if (!URL.canParse(link.href)) {

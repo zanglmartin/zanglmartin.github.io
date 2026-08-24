@@ -36,11 +36,12 @@ export const profile: Profile = {
     { language: "German", proficiency: "Limited working proficiency" },
     { language: "Italian", proficiency: "Limited working proficiency" },
   ],
-  domains: ["Fintech", "Healthcare", "IoT", "Developer SDKs", "Clinical imaging"],
-  metrics: [
-    { value: "15+", label: "Years in engineering", detail: "Mobile products and SDKs" },
-    { value: "99%", label: "Crash-free rate", detail: "Improved from 70%" },
-    { value: "24%", label: "Lower memory use", detail: "Measured on a legacy app" },
-    { value: "33%", label: "Better CPU use", detail: "Measured with Android tooling" },
+  domains: ["Fintech", "Healthcare", "IoT", "Developer SDKs"],
+  businessAreas: [
+    { name: "Fintech", focus: "Payments, wallets & credit", detail: "Checkout.com · PayPal · MercadoLibre" },
+    { name: "Healthcare", focus: "Clinical imaging & digital care", detail: "Swift Medical" },
+    { name: "IoT", focus: "Connected mobility & embedded systems", detail: "E-bike platform · Arduino · GPS" },
+    { name: "Consumer", focus: "Social, education & gaming", detail: "Words with Friends · university products" },
   ],
+  
 };

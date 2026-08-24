@@ -6,15 +6,6 @@ I build reliable mobile products and developer-facing SDKs across Android, iOS, 
 
 [View my portfolio](https://zanglmartin.github.io/) · [Connect on LinkedIn](https://www.linkedin.com/in/martinzangl/) · [Primary engineering profile: @mizangl](https://github.com/mizangl)
 
-## Selected impact
-
-| Outcome | Result |
-| --- | --- |
-| Application reliability | Improved crash-free rate from **70% to 99%** |
-| Resource efficiency | Reduced memory use by approximately **24%** |
-| Runtime performance | Improved CPU utilization by approximately **33%** |
-| Engineering experience | **15+ years** building products and SDKs |
-
 ## What I work on
 
 - Android architecture with Kotlin, Coroutines, Flow, MVVM/MVI, and Jetpack Compose

@@ -43,4 +43,5 @@ export const profile: Profile = {
     { name: "IoT", focus: "Connected mobility & embedded systems", detail: "E-bike platform · Arduino · GPS" },
     { name: "Consumer", focus: "Social, education & gaming", detail: "Words with Friends · university products" },
   ],
+  
 };

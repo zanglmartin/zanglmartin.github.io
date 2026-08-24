@@ -4,7 +4,6 @@ import { createServer } from "node:http";
 import path from "node:path";
 
 const root = path.resolve("build/pages");
-const prefix = "/zanglmartin";
 const port = Number(process.env.PORTFOLIO_PREVIEW_PORT ?? 4173);
 const contentTypes = new Map([
   [".css", "text/css; charset=utf-8"],
@@ -19,7 +18,7 @@ const contentTypes = new Map([
 ]);
 
 async function resolveFile(urlPath) {
-  const relative = decodeURIComponent(urlPath.slice(prefix.length)).replace(/^\/+/, "");
+  const relative = decodeURIComponent(urlPath).replace(/^\/+/, "");
   let target = path.resolve(root, relative);
   if (!target.startsWith(`${root}${path.sep}`) && target !== root) return null;
 
@@ -35,17 +34,6 @@ async function resolveFile(urlPath) {
 
 const server = createServer(async (request, response) => {
   const url = new URL(request.url ?? "/", "http://127.0.0.1");
-  if (url.pathname === prefix) {
-    response.writeHead(308, { location: `${prefix}/` });
-    response.end();
-    return;
-  }
-  if (!url.pathname.startsWith(`${prefix}/`)) {
-    response.writeHead(404);
-    response.end("Not found");
-    return;
-  }
-
   const file = await resolveFile(url.pathname);
   if (!file) {
     response.writeHead(404);
@@ -61,5 +49,5 @@ const server = createServer(async (request, response) => {
 });
 
 server.listen(port, "127.0.0.1", () => {
-  console.log(`Portfolio preview: http://127.0.0.1:${port}${prefix}/`);
+  console.log(`Portfolio preview: http://127.0.0.1:${port}/`);
 });

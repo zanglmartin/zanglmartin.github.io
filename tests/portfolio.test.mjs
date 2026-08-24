@@ -69,7 +69,7 @@ async function extractPdfText(buffer) {
   return pages.join("\n");
 }
 
-test("pre-renders exactly the expected routes with the GitHub Pages base path", async () => {
+test("pre-renders exactly the expected routes at the GitHub Pages root", async () => {
   const htmlFiles = await collectFiles(buildRoot.pathname, ".html");
   const relativeFiles = htmlFiles.map((file) => path.relative(buildRoot.pathname, file)).sort();
   assert.deepEqual(relativeFiles, routes.map((route) => route.output).sort());
@@ -77,20 +77,18 @@ test("pre-renders exactly the expected routes with the GitHub Pages base path", 
   for (const route of routes) {
     const html = await readFile(new URL(route.output, buildRoot), "utf8");
     assert.match(html, new RegExp(`<title>${route.title.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}</title>`));
-    assert.doesNotMatch(html, /"\/assets\//);
+    assert.match(html, /"\/assets\//);
+    assert.doesNotMatch(html, /"\/zanglmartin(?:\/|")/);
     const internalReferences = [...html.matchAll(/\b(?:href|src)="(\/[^"]*)"/g)].map((match) => match[1]);
     assert.ok(internalReferences.length > 0, `${route.output} should contain internal references`);
     for (const reference of internalReferences) {
-      assert.ok(
-        reference === "/zanglmartin" || reference.startsWith("/"),
-        `${route.output} contains a root-relative reference without the Pages base path: ${reference}`,
-      );
+      assert.ok(!reference.startsWith("/zanglmartin"), `${route.output} contains the old Pages base path: ${reference}`);
     }
   }
 
   const JavaScriptFiles = await collectFiles(new URL("assets/", buildRoot).pathname, ".js");
   const JavaScript = (await Promise.all(JavaScriptFiles.map((file) => readFile(file, "utf8")))).join("\n");
-  assert.doesNotMatch(JavaScript, /"\/assets\//);
+  assert.doesNotMatch(JavaScript, /"\/zanglmartin(?:\/|")/);
 });
 
 test("publishes unique complete metadata for every route", async () => {

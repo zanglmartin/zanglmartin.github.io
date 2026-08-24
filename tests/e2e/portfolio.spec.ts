@@ -74,7 +74,7 @@ test("mobile menu supports navigation and Escape", async ({ page }, testInfo) =>
 
   await menu.click();
   await page.getByRole("navigation", { name: "Primary navigation" }).getByRole("link", { name: "About" }).click();
-  await expect(page).toHaveURL(/\/zanglmartin\/about\/?$/);
+  await expect(page).toHaveURL(/\/about\/?$/);
   await expect(page.getByRole("button", { name: "Menu" })).toHaveAttribute("aria-expanded", "false");
 });
 

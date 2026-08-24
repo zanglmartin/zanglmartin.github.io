@@ -40,8 +40,8 @@ export const profile: Profile = {
   businessAreas: [
     { name: "Fintech", focus: "Payments, wallets & credit", detail: "Checkout.com · PayPal · MercadoLibre" },
     { name: "Healthcare", focus: "Clinical imaging & digital care", detail: "Swift Medical" },
-    { name: "IoT", focus: "Connected mobility & embedded systems", detail: "E-bike platform · Arduino · GPS" },
-    { name: "Consumer", focus: "Social, education & gaming", detail: "Words with Friends · university products" },
+    { name: "IoT", focus: "Connected mobility & embedded systems", detail: "BLE · Arduino · GPS" },
+    { name: "Consumer", focus: "Social, education & gaming", detail: "Words with Friends · University Student Profile" },
   ],
-  
+
 };

@@ -46,14 +46,14 @@ test("desktop navigation reaches every primary section", async ({ page }, testIn
   }
 });
 
-test("engineering outcomes stay in one row on laptop screens", async ({ page }, testInfo) => {
+test("business areas stay in one row on laptop screens", async ({ page }, testInfo) => {
   test.skip(testInfo.project.name !== "desktop");
   await page.setViewportSize({ width: 900, height: 1000 });
   await page.goto("./");
 
-  const outcomes = page.locator(".metric-strip article");
-  await expect(outcomes).toHaveCount(4);
-  const topEdges = await outcomes.evaluateAll((items) =>
+  const businessAreas = page.locator(".business-strip article");
+  await expect(businessAreas).toHaveCount(4);
+  const topEdges = await businessAreas.evaluateAll((items) =>
     items.map((item) => Math.round(item.getBoundingClientRect().top)),
   );
   expect(new Set(topEdges).size).toBe(1);

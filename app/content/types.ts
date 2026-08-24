@@ -15,6 +15,12 @@ export interface SpokenLanguage {
   proficiency: string;
 }
 
+export interface BusinessArea {
+  name: string;
+  focus: string;
+  detail: string;
+}
+
 export interface Profile {
   name: string;
   shortName: string;
@@ -26,7 +32,7 @@ export interface Profile {
   education: Education;
   spokenLanguages: SpokenLanguage[];
   domains: string[];
-  metrics: Array<{ value: string; label: string; detail: string }>;
+  businessAreas: BusinessArea[];
 }
 
 export interface Experience {

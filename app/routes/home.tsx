@@ -42,11 +42,11 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="metric-strip" aria-label="Selected engineering outcomes">
-        {profile.metrics.map((metric) => (
-          <article key={metric.label}>
-            <strong>{metric.value}</strong>
-            <div><span>{metric.label}</span><small>{metric.detail}</small></div>
+      <section className="business-strip" aria-label="Business experience across industries">
+        {profile.businessAreas.map((area) => (
+          <article key={area.name}>
+            <strong>{area.name}</strong>
+            <div><span>{area.focus}</span><small>{area.detail}</small></div>
           </article>
         ))}
       </section>

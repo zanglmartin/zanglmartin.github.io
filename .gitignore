@@ -44,3 +44,6 @@ yarn-error.log*
 /tmp/
 /outputs/
 /work/
+
+# Generated local code analysis
+/graphify-out/

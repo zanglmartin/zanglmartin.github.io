@@ -1,0 +1,606 @@
+{
+  "profile": {
+    "name": "Martin Ignacio Zangl",
+    "shortName": "Martin Zangl",
+    "headline": "Senior Android & Mobile Engineer",
+    "location": "Valencia, Spain",
+    "summary": "I build reliable mobile products and developer-facing SDKs across Android, iOS, Flutter, and React Native.",
+    "longSummary": [
+      "I am a senior software engineer with 15+ years of experience building mobile products and developer-facing SDKs for companies including PayPal, MercadoLibre, Checkout.com, and Swift Medical.",
+      "My work sits where architecture, product delivery, and reliability meet: modernizing legacy systems without stopping delivery, improving performance on constrained devices, creating strong testing cultures, and keeping behavior consistent across platforms.",
+      "I have delivered products across fintech, healthcare, IoT, education, social platforms, and gaming, while mentoring engineers and leading architecture workshops."
+    ],
+    "socialLinks": [
+      {
+        "label": "LinkedIn",
+        "href": "https://www.linkedin.com/in/martinzangl/",
+        "kind": "linkedin"
+      },
+      {
+        "label": "Primary GitHub",
+        "href": "https://github.com/mizangl",
+        "kind": "github"
+      },
+      {
+        "label": "Portfolio repository",
+        "href": "https://github.com/zanglmartin/zanglmartin.github.io",
+        "kind": "portfolio"
+      }
+    ],
+    "education": {
+      "degree": "B.S. Information Systems Engineering",
+      "institution": "National Technological University",
+      "location": "Córdoba, Argentina"
+    },
+    "spokenLanguages": [
+      {
+        "language": "Spanish",
+        "proficiency": "Native speaker"
+      },
+      {
+        "language": "English",
+        "proficiency": "Full professional proficiency"
+      },
+      {
+        "language": "German",
+        "proficiency": "Limited working proficiency"
+      },
+      {
+        "language": "Italian",
+        "proficiency": "Limited working proficiency"
+      }
+    ],
+    "domains": ["Fintech", "Healthcare", "IoT", "Developer SDKs"]
+  },
+  "skillGroups": [
+    {
+      "title": "Core mobile languages",
+      "level": "Primary",
+      "description": "The languages I use to lead Android delivery and modernization.",
+      "skills": ["Kotlin", "Java"]
+    },
+    {
+      "title": "Cross-platform delivery",
+      "level": "Applied",
+      "description": "Hands-on delivery across native and shared mobile stacks.",
+      "skills": ["Dart", "Swift", "TypeScript", "JavaScript"]
+    },
+    {
+      "title": "Platform breadth",
+      "level": "Supporting",
+      "description": "Supporting languages and environments used to bridge platform work.",
+      "skills": ["Objective-C", "Node.js", "Java EE", "Ktor", "Apache Spark"]
+    },
+    {
+      "title": "Mobile platform",
+      "level": "Tooling",
+      "description": "Libraries and runtimes used to build, test, and diagnose mobile systems.",
+      "skills": [
+        "Android SDK",
+        "Jetpack Compose",
+        "Coroutines",
+        "Flow",
+        "CameraX",
+        "WorkManager",
+        "Room",
+        "Flutter",
+        "React Native",
+        "AVFoundation"
+      ]
+    },
+    {
+      "title": "Quality and delivery",
+      "level": "Tooling",
+      "description": "Practices that keep delivery observable and repeatable.",
+      "skills": [
+        "TDD",
+        "JUnit",
+        "MockK",
+        "Turbine",
+        "Espresso",
+        "UI Automator",
+        "JaCoCo",
+        "GitHub Actions",
+        "GitLab CI",
+        "Jenkins",
+        "Fastlane"
+      ]
+    }
+  ],
+  "systemDesignThemes": [
+    {
+      "id": "architecture-modernization",
+      "number": "01",
+      "title": "Architecture modernization",
+      "description": "Move legacy mobile systems toward testable, reactive architectures without stopping product delivery.",
+      "technologies": [
+        "MVVM",
+        "MVI",
+        "Clean Architecture",
+        "SOLID",
+        "Coroutines",
+        "Flow"
+      ],
+      "workIds": ["swift", "paypal"]
+    },
+    {
+      "id": "offline-first",
+      "number": "02",
+      "title": "Offline-first reliability",
+      "description": "Design synchronization and event delivery for intermittent networks and constrained devices.",
+      "technologies": [
+        "Room",
+        "WorkManager",
+        "DataStore",
+        "SQLite",
+        "Reliable delivery"
+      ],
+      "workIds": ["swift"]
+    },
+    {
+      "id": "sdk-design",
+      "number": "03",
+      "title": "SDK and platform consistency",
+      "description": "Keep public behavior aligned across Android, iOS, Flutter, and React Native boundaries.",
+      "technologies": [
+        "Android SDK",
+        "iOS SDK",
+        "React Native",
+        "TypeScript",
+        "API design"
+      ],
+      "workIds": ["checkout", "mercadolibre"]
+    },
+    {
+      "id": "performance",
+      "number": "04",
+      "title": "Performance and concurrency",
+      "description": "Diagnose the behavior users feel: crashes, memory pressure, CPU load, and concurrency defects.",
+      "technologies": [
+        "Perfetto",
+        "Android Profiler",
+        "Coroutines",
+        "Concurrency",
+        "Memory analysis"
+      ],
+      "workIds": ["swift"]
+    },
+    {
+      "id": "quality",
+      "number": "05",
+      "title": "Testing and delivery systems",
+      "description": "Use behavioral tests and automated pipelines to make high-risk change safer and repeatable.",
+      "technologies": ["TDD", "JUnit", "MockK", "Espresso", "JaCoCo", "CI/CD"],
+      "workIds": ["paypal"]
+    },
+    {
+      "id": "imaging",
+      "number": "06",
+      "title": "Camera and clinical imaging",
+      "description": "Build native camera infrastructure and image pipelines across device and simulator environments.",
+      "technologies": [
+        "CameraX",
+        "AVFoundation",
+        "OpenCV",
+        "TensorFlow Lite",
+        "Image processing"
+      ],
+      "workIds": ["swift"]
+    }
+  ],
+  "work": [
+    {
+      "company": "Parser",
+      "client": "Checkout.com",
+      "role": "Senior Mobile Engineer",
+      "period": "Dec 2025 - Jul 2026",
+      "summary": "Delivered React Native SDK work through its Android and iOS dependencies and used merchant-facing sample development to identify platform differences.",
+      "achievements": [
+        "Fixed critical React Native SDK bugs and implemented required Android and iOS changes before completing the wrapper work for release.",
+        "Developed the public Android sample using the iOS sample as the agreed design reference.",
+        "Documented platform differences and created follow-up tasks.",
+        "Prioritized merchant-requested fixes, joined issue discussions, and onboarded a new iOS developer from Parser.",
+        "Owned co-branded card-scheme development with open display-priority requirements and took on Gradle configuration tooling for an internal sample."
+      ],
+      "technologies": [
+        "Kotlin",
+        "Android SDK",
+        "Swift",
+        "iOS SDK",
+        "React Native",
+        "TypeScript",
+        "Gradle"
+      ],
+      "featured": true,
+      "id": "checkout",
+      "metrics": [],
+      "outcomes": [
+        "The native dependency changes and completed React Native work were included in a release.",
+        "Platform differences were documented for follow-up. Publication of the public sample and resolution of every difference are not claimed.",
+        "Card-scheme and configuration-tooling work describe contributions in progress; their shipping and adoption outcomes are not established."
+      ],
+      "story": {
+        "slug": "payment-sdks",
+        "title": "Following SDK fixes across platform boundaries",
+        "context": "As a Parser contractor on Checkout.com’s Android Payment Flow team, I worked on a public merchant sample and took responsibility for critical React Native SDK bugs and incomplete features.",
+        "challenge": "Completing wrapper features required native releases first. Sample development also exposed differences in configuration, styling, and behavior between Android and iOS.",
+        "decisions": [
+          "Native dependency changes had to be published before the React Native work could be completed. I followed the dependency chain across both native platforms.",
+          "Without a UX designer for the merchant sample, my engineering manager and I agreed to use the existing iOS sample as the Android reference.",
+          "Co-branded card presentation required an agreed business rule. Display priority remained an open requirement; this work is not presented as shipped payment-routing functionality."
+        ],
+        "quality": [
+          "Compared SDK configuration, styling, and behavior while building the sample and working across native platforms.",
+          "Recorded inconsistencies as follow-up tasks and used merchant discussions to understand and prioritize stability issues.",
+          "Kept internal configuration tooling separate from the public sample: the Gradle approach generated Android resources from multiple API-key sources."
+        ]
+      }
+    },
+    {
+      "company": "Swift Medical",
+      "role": "Senior Android Engineer",
+      "period": "Mar 2023 - Oct 2025",
+      "summary": "Restored stalled document synchronization and improved stability through an application-owned queue, profiling, and incremental modernization.",
+      "achievements": [
+        "Introduced an application-owned database queue and separated connectivity policy from WorkManager scheduling.",
+        "Piloted Coroutines in a low-priority synchronization area, compared memory and CPU behavior, then extended the migration.",
+        "Profiled document creation and prioritized frequently used flows for a staged migration from RxJava and MVP to Coroutines and MVVM.",
+        "Led the replacement of Mixpanel with an internal analytics library and monitored its staged production rollout.",
+        "Supported native camera plugins and FHIR data structures in the Flutter product; enabled SwiftVision on ARM64 iOS simulators and migrated native dependencies for 16 KB pages."
+      ],
+      "technologies": [
+        "Kotlin",
+        "Coroutines",
+        "MVVM",
+        "WorkManager",
+        "RxJava",
+        "Perfetto",
+        "Flutter",
+        "Swift",
+        "OpenCV",
+        "TensorFlow",
+        "C++",
+        "FHIR"
+      ],
+      "featured": true,
+      "id": "swift",
+      "metrics": [
+        {
+          "id": "crash-free",
+          "value": "≈70% → 99.6%",
+          "label": "Crash-free usage"
+        },
+        {
+          "id": "memory",
+          "value": "≈24%",
+          "label": "Lower memory consumption"
+        },
+        {
+          "id": "cpu",
+          "value": "≈33%",
+          "label": "Better CPU utilization"
+        }
+      ],
+      "outcomes": [
+        "Documents that had been waiting on customer devices for months successfully synchronized.",
+        "The application gained explicit synchronization queue ownership and better processing observability.",
+        "SwiftVision shipped with ARM64 iOS Simulator support, and native-library support for 16 KB pages was delivered by the required deadline."
+      ],
+      "story": {
+        "slug": "mobile-reliability",
+        "title": "Making offline clinical work reliable",
+        "context": "Swift Medical’s clinical Android application supported offline document creation and image capture. I later joined the team supporting its production Flutter application, working on native Android and iOS capabilities.",
+        "challenge": "Failed synchronization was the main customer complaint. Pending work was coupled to WorkManager’s internal state, and out-of-order operations were rejected by the backend. Some documents remained on devices for months. Long sessions also exposed memory leaks and expensive bitmap and encryption work.",
+        "decisions": [
+          "The product needed to own synchronization state and ordering. WorkManager remained responsible for scheduling execution, while the application database held pending domain operations.",
+          "A measured pilot established whether Coroutines improved the existing thread-heavy implementation before extending the change. Frequently used flows took priority over a wholesale rewrite.",
+          "Clean Architecture made replacing analytics practical, but production behavior still determined rollout readiness. I stopped the first limited rollout when results were unacceptable, iterated on the library, and released again."
+        ],
+        "quality": [
+          "Used CPU and Memory Profilers, allocation and leak analysis, and Perfetto to investigate long-session failures and blocked threads.",
+          "Compared resource use before expanding the synchronization migration and monitored adoption and performance during analytics rollout.",
+          "Compiled OpenCV and TensorFlow dependencies for ARM64 iOS simulators and validated SwiftVision with the computer-vision team before its production release."
+        ]
+      }
+    },
+    {
+      "company": "PayPal",
+      "role": "Senior Android Engineer",
+      "period": "Nov 2021 - Jan 2023",
+      "summary": "Expanded validation beyond unit tests, traced an incorrect balance to its business rule, and owned module integration across release trains.",
+      "achievements": [
+        "Mapped the Savings journey and documented existing behavior before planning small refactors.",
+        "Introduced integration and end-to-end validation alongside existing unit tests.",
+        "Built a test library to inject and queue backend responses, including edge cases, with Page Objects for reusable customer journeys.",
+        "Restructured functional flows with MVVM and unidirectional data flow and worked with DevOps on Jenkins coverage reporting.",
+        "Owned module release integration and coordinated fixes for cross-module conflicts."
+      ],
+      "technologies": [
+        "Kotlin",
+        "MVVM",
+        "UDF",
+        "Page Objects",
+        "Integration testing",
+        "End-to-end testing",
+        "Jenkins",
+        "iOS",
+        "Java"
+      ],
+      "featured": true,
+      "id": "paypal",
+      "metrics": [],
+      "outcomes": [
+        "Exposed and reproduced an incorrect balance that previously required a manual refresh, protecting corrected behavior with automation.",
+        "Established reusable scenarios for full financial journeys.",
+        "Resolved a cross-module theme conflict before it delayed feature integration."
+      ],
+      "story": {
+        "slug": "paypal",
+        "title": "Making financial journeys reproducible",
+        "context": "I joined PayPal Savings while it was an MVP in production. Its customer journey covered compliance, activation, balance operations, and funding sources. I later moved to Credits UK, contributing across Android, iOS, and Java backend work.",
+        "challenge": "Strong unit coverage did not establish that complete customer journeys worked across module, API, and UI boundaries. One business-rule defect displayed an incorrect balance until the customer refreshed.",
+        "decisions": [
+          "Incremental refactoring preserved verified behavior in a live financial product while allowing delivery to continue.",
+          "Explicit event-to-state paths made asynchronous compliance, funding, and balance operations easier to trace. Reproducible backend responses connected a visible balance inconsistency to the underlying business rule.",
+          "End-to-end tests broadened confidence but cost more to maintain. Queued responses and Page Objects controlled environment variability and repetitive setup."
+        ],
+        "quality": [
+          "Measured coverage across unit, integration, and end-to-end layers in Jenkins.",
+          "Reproduced success and failure scenarios with controlled backend responses and verified corrected balance behavior.",
+          "Tested the assembled application in release trains. During a theme migration, traced a duplicate dependency to another module and coordinated the correction."
+        ]
+      }
+    },
+    {
+      "company": "MercadoLibre",
+      "role": "Senior Android Engineer",
+      "period": "Apr 2020 - Nov 2021",
+      "summary": "Built shared resources and virtual credit-card flows, connecting API contracts, reusable components, customer journeys, and application observability.",
+      "achievements": [
+        "Built a small resource-handling SDK for shared assets.",
+        "Helped define mobile and middle-end contracts for screen payloads and customer interaction events, contributing middle-end changes when needed.",
+        "Created and registered UI components, documented complex behavior, and prepared components for shared use when reuse justified it.",
+        "Used FLEX dispatchers and stores for complex server-driven flows with explicit state and event paths.",
+        "Defined engineering and product metrics and collaborated with the architecture team on application-wide observability."
+      ],
+      "technologies": [
+        "Kotlin",
+        "Android",
+        "FLEX",
+        "UDF",
+        "Server-driven UI",
+        "Andes",
+        "API design",
+        "Observability"
+      ],
+      "featured": true,
+      "id": "mercadolibre",
+      "metrics": [],
+      "outcomes": [
+        "Delivered resource handling and components intended for consumption across product teams.",
+        "Connected mobile payloads, customer events, and telemetry within complete product flows.",
+        "Identified release-train edge cases and worked with the architecture team on observability improvements."
+      ],
+      "story": {
+        "slug": "mercadolibre",
+        "title": "Connecting feature ownership to platform reliability",
+        "context": "At MercadoLibre, product teams owned modules within a larger application and contributed to common libraries. I worked on virtual credit-card flows and shared resources, including integrations with Andes UI Components and Andes Images.",
+        "challenge": "A feature had to fit a platform used by many teams. Contracts, UI behavior, edge cases, and telemetry needed to stay coherent when modules came together in release trains.",
+        "decisions": [
+          "Feature-specific behavior stayed in its owning module. Shared components needed a clear reuse case because API evolution, compatibility, and governance affected other teams.",
+          "Server-driven composition supported flows that benefited from middle-end control. FLEX made state transitions explicit without requiring every screen to become dynamic.",
+          "Module autonomy made release-train validation essential. Integration edge cases became inputs to shared observability improvements."
+        ],
+        "quality": [
+          "Tested module behavior and edge cases against required coverage expectations.",
+          "Defined latency percentiles from P50 through P99 alongside customer-journey progression and payment timing signals.",
+          "Investigated alerts and weak product metrics with the team, sharing discoveries and clarifying initially incomplete use cases."
+        ]
+      }
+    },
+    {
+      "company": "Santex America",
+      "role": "Senior Android Engineer",
+      "period": "May 2015 - Apr 2020",
+      "summary": "Delivered mobile products across IoT, social, education, and gaming, including contributions to Words with Friends.",
+      "achievements": [
+        "Led Android development across an IoT e-bike platform, a CEO network, and a multi-university student portal.",
+        "Contributed to Words with Friends, a consumer product with 50M users.",
+        "Implemented automated CI builds and improved build times with scripting.",
+        "Organized onboarding and workshops on RxJava and Clean Architecture."
+      ],
+      "technologies": [
+        "Android",
+        "Java",
+        "Kotlin",
+        "JavaScript",
+        "Dart",
+        "Flutter",
+        "React Native",
+        "Objective-C",
+        "Swift",
+        "Firebase",
+        "Jenkins",
+        "CI/CD"
+      ],
+      "id": "santex",
+      "metrics": [],
+      "outcomes": []
+    },
+    {
+      "company": "Globant",
+      "role": "Semi-Senior Android Engineer",
+      "period": "May 2014 - May 2015",
+      "summary": "Delivered native Android solutions for enterprise clients including BBVA and JPMorgan Chase.",
+      "achievements": [
+        "Migrated legacy mobile web applications to native Android.",
+        "Built a multithreaded conference-room booking app with complex timezone synchronization.",
+        "Maintained client-side platform tooling and a secure internal app-distribution platform."
+      ],
+      "technologies": [
+        "Android Studio",
+        "Java",
+        "Dagger",
+        "Jenkins",
+        "Apache Cordova",
+        "Git",
+        "Jira"
+      ],
+      "id": "globant",
+      "metrics": [],
+      "outcomes": []
+    },
+    {
+      "company": "Taller Technologies",
+      "role": "Android Engineer",
+      "period": "Mar 2013 - May 2014",
+      "summary": "Contributed to Intel Context Aware middleware SDK and real-time retail solutions.",
+      "achievements": [
+        "Developed Android components for the Intel Context Aware middleware SDK.",
+        "Implemented an XMPP-based electronic price-tag client and internal tooling.",
+        "Built internal migration tooling using Node.js."
+      ],
+      "technologies": ["Android", "Java", "XMPP", "Node.js"],
+      "id": "taller",
+      "metrics": [],
+      "outcomes": []
+    },
+    {
+      "company": "Self-Employed",
+      "role": "Software Engineer",
+      "period": "Sep 2005 - Mar 2010",
+      "summary": "Built custom software for small businesses and prototyped embedded and mobile products.",
+      "achievements": [
+        "Delivered Java Swing desktop applications, a photo-order system, and an ERP solution.",
+        "Engineered an IoT taximeter integrating Arduino sensors, GPS, and a custom Android client."
+      ],
+      "technologies": ["Java", "Swing", "Android", "Arduino", "GPS", "IoT"],
+      "id": "independent",
+      "metrics": [],
+      "outcomes": []
+    }
+  ],
+  "featuredWork": ["swift", "paypal", "mercadolibre", "checkout"],
+  "site": {
+    "url": "https://zanglmartin.github.io/",
+    "cvPath": "/cv/martin-zangl-cv-2026.pdf",
+    "portraitPath": "/images/martin-zangl-professional-muted.webp",
+    "socialImagePath": "/og.png",
+    "copyrightYear": 2026
+  },
+  "navigation": [
+    {
+      "to": "/case-studies",
+      "label": "Work"
+    },
+    {
+      "to": "/experience",
+      "label": "Experience"
+    },
+    {
+      "to": "/expertise",
+      "label": "Expertise"
+    },
+    {
+      "to": "/about",
+      "label": "About"
+    }
+  ],
+  "pages": {
+    "home": {
+      "path": "/",
+      "title": "Martin Zangl | Senior Android & Mobile Engineer",
+      "heading": "Mobile engineering, from the customer problem to production.",
+      "description": "I build reliable mobile products and developer-facing SDKs across Android, iOS, Flutter, and React Native.",
+      "eyebrow": "Senior Android & Mobile Engineer"
+    },
+    "about": {
+      "path": "/about",
+      "title": "About | Martin Zangl",
+      "heading": "Engineering with a product perspective.",
+      "description": "I help teams make complex mobile products more reliable, maintainable, and easier to evolve.",
+      "eyebrow": "About"
+    },
+    "experience": {
+      "path": "/experience",
+      "title": "Experience | Martin Zangl",
+      "heading": "A career across mobile products and platforms.",
+      "description": "From early embedded systems to financial journeys, clinical imaging, and payment SDKs.",
+      "eyebrow": "Experience"
+    },
+    "expertise": {
+      "path": "/expertise",
+      "title": "Expertise | Martin Zangl",
+      "heading": "Android depth. A view across the system.",
+      "description": "Architecture, reliability, and delivery practices connected to the work where I applied them.",
+      "eyebrow": "Expertise"
+    },
+    "stories": {
+      "path": "/case-studies",
+      "title": "Case Studies | Martin Zangl",
+      "heading": "Four teams. Four engineering stories.",
+      "description": "The problem, my contribution, the decisions, and what changed.",
+      "eyebrow": "Selected work"
+    },
+    "legacy": {
+      "path": "/case-studies/fintech-architecture",
+      "title": "Fintech architecture | Martin Zangl",
+      "heading": "Two teams, distinct stories.",
+      "description": "My PayPal and MercadoLibre work now has a separate case study for each company.",
+      "eyebrow": "Fintech architecture"
+    }
+  },
+  "copy": {
+    "selectedWork": "Selected work",
+    "expertiseHeading": "Decisions grounded in delivery.",
+    "careerHeading": "Where I have worked",
+    "contactHeading": "Let’s talk about your mobile engineering challenges.",
+    "contactLabel": "Message on LinkedIn",
+    "cvLabel": "Download CV",
+    "readStory": "Read the case study",
+    "footerNote": "A static portfolio. No tracking, no cookies.",
+    "sections": {
+      "context": "Product context and challenge",
+      "ownership": "My scope and ownership",
+      "decisions": "Decisions and trade-offs",
+      "quality": "Quality, validation, and delivery",
+      "outcomes": "Outcomes",
+      "technology": "Supporting technologies"
+    },
+    "exploreWork": "Explore my work",
+    "exploreExpertise": "Explore expertise",
+    "fullExperience": "View full experience",
+    "connect": "Connect",
+    "contactEyebrow": "Next conversation",
+    "roleCount": "Roles across mobile, platform, and product engineering",
+    "selectedExperience": "Selected experience",
+    "themeCount": "System-design themes grounded in delivery",
+    "skillsEyebrow": "Programming languages & platforms",
+    "skillsHeading": "Tools I use in practice.",
+    "systemsEyebrow": "System design",
+    "systemsHeading": "How I approach mobile systems.",
+    "systemsDescription": "Each theme connects to a case study showing where I applied it.",
+    "basedIn": "Based in",
+    "workingAcross": "Working across",
+    "platformFocus": "Mobile platforms & SDKs",
+    "portraitCaption": "Product-oriented engineering",
+    "education": "Education",
+    "languages": "Languages",
+    "domains": "Domains",
+    "allStories": "All case studies"
+  },
+  "cv": {
+    "workIds": [
+      "checkout",
+      "swift",
+      "paypal",
+      "mercadolibre",
+      "santex",
+      "globant",
+      "taller",
+      "independent"
+    ],
+    "featuredBulletLimit": 3,
+    "earlierBulletLimit": 1
+  }
+}

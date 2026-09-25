@@ -1,28 +1,22 @@
+<!-- portfolio:generated:start -->
 # Martin Zangl
 
 ### Senior Android & Mobile Engineer
 
-I build reliable mobile products and developer-facing SDKs across Android, iOS, Flutter, and React Native. My work combines architecture modernization, performance engineering, testing culture, and product delivery across fintech, healthcare, and IoT.
+I build reliable mobile products and developer-facing SDKs across Android, iOS, Flutter, and React Native.
 
-[View my portfolio](https://zanglmartin.github.io/) · [Connect on LinkedIn](https://www.linkedin.com/in/martinzangl/) · [Primary engineering profile: @mizangl](https://github.com/mizangl)
+[View portfolio](https://zanglmartin.github.io/) · [LinkedIn](https://www.linkedin.com/in/martinzangl/) · [Primary GitHub](https://github.com/mizangl)
 
-## What I work on
+## Selected engineering stories
 
-- Android architecture with Kotlin, Coroutines, Flow, MVVM/MVI, and Jetpack Compose
-- Cross-platform SDK consistency across Android, iOS, Flutter, and React Native
-- Offline-first synchronization and reliable event delivery
-- Performance, concurrency, observability, and constrained-device engineering
-- TDD, integration testing, end-to-end pipelines, and maintainable CI/CD
-- Camera and imaging infrastructure with CameraX, AVFoundation, and OpenCV
+- [Swift Medical: Making offline clinical work reliable](https://zanglmartin.github.io/case-studies/mobile-reliability/) — Restored stalled document synchronization and improved stability through an application-owned queue, profiling, and incremental modernization. Crash-free usage: ≈70% → 99.6%; Lower memory consumption: ≈24%; Better CPU utilization: ≈33%.
+- [PayPal: Making financial journeys reproducible](https://zanglmartin.github.io/case-studies/paypal/) — Expanded validation beyond unit tests, traced an incorrect balance to its business rule, and owned module integration across release trains.
+- [MercadoLibre: Connecting feature ownership to platform reliability](https://zanglmartin.github.io/case-studies/mercadolibre/) — Built shared resources and virtual credit-card flows, connecting API contracts, reusable components, customer journeys, and application observability.
+- [Checkout.com: Following SDK fixes across platform boundaries](https://zanglmartin.github.io/case-studies/payment-sdks/) — Delivered React Native SDK work through its Android and iOS dependencies and used merchant-facing sample development to identify platform differences.
 
-## Featured engineering stories
+Valencia, Spain
+<!-- portfolio:generated:end -->
 
-- [Mobile reliability and legacy modernization](https://zanglmartin.github.io/case-studies/mobile-reliability/)
-- [Cross-platform payment SDK delivery](https://zanglmartin.github.io/case-studies/payment-sdks/)
-- [Reusable fintech architecture](https://zanglmartin.github.io/case-studies/fintech-architecture/)
+## Maintenance
 
-This repository hosts the portfolio. My established code and open-source activity remain on [github.com/mizangl](https://github.com/mizangl).
-
----
-
-Valencia, Spain · English and Spanish
+See [CONTRIBUTING.md](CONTRIBUTING.md) for content editing, generation, and verification.

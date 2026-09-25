@@ -1,120 +1,149 @@
-import { caseStudies } from "./caseStudies";
-import { experiences } from "./experience";
-import { profile } from "./profile";
-import { skillGroups, systemDesignThemes } from "./skills";
-import type {
-  CaseStudy,
-  Experience,
-  Profile,
-  SkillGroup,
-  SystemDesignTheme,
-} from "./types";
-
-export interface PortfolioContent {
-  profile: Profile;
-  experiences: Experience[];
-  skillGroups: SkillGroup[];
-  systemDesignThemes: SystemDesignTheme[];
-  caseStudies: CaseStudy[];
-}
-
-export const portfolioContent: PortfolioContent = {
-  profile,
-  experiences,
-  skillGroups,
-  systemDesignThemes,
-  caseStudies,
-};
-
-function requireText(value: string, label: string) {
-  if (!value.trim()) throw new Error(`Missing portfolio content: ${label}`);
-}
-
-function requireList(values: string[], label: string) {
-  if (!values.length) throw new Error(`Missing portfolio content: ${label}`);
-  values.forEach((value, index) => requireText(value, `${label}[${index}]`));
-}
-
+import { portfolio, type PortfolioContent } from "./portfolio";
+export type { PortfolioContent } from "./portfolio";
+export const portfolioContent = portfolio;
 export function validateContent(content: PortfolioContent) {
-  const {
-    profile: currentProfile,
-    experiences: currentExperiences,
-    skillGroups: currentSkillGroups,
-    systemDesignThemes: currentThemes,
-    caseStudies: currentCaseStudies,
-  } = content;
-
-  requireText(currentProfile.name, "profile.name");
-  requireText(currentProfile.headline, "profile.headline");
-  requireText(currentProfile.summary, "profile.summary");
-  requireText(currentProfile.location, "profile.location");
-
-  if (!currentProfile.businessAreas.length) throw new Error("Missing portfolio content: profile.businessAreas");
-  currentProfile.businessAreas.forEach((area, index) => {
-    const label = `profile.businessAreas[${index}]`;
-    requireText(area.name, `${label}.name`);
-    requireText(area.focus, `${label}.focus`);
-    requireText(area.detail, `${label}.detail`);
+  const text = (value: unknown, label: string) => {
+    if (typeof value !== "string" || !value.trim())
+      throw new Error(`Missing content: ${label}`);
+  };
+  const list = (values: string[], label: string) => {
+    if (!Array.isArray(values) || !values.length)
+      throw new Error(`Missing content: ${label}`);
+    values.forEach((value) => text(value, label));
+  };
+  const unique = (values: string[], label: string) => {
+    values.forEach((value) => text(value, label));
+    if (new Set(values).size !== values.length)
+      throw new Error(`Duplicate ${label}`);
+  };
+  const url = (value: string, label: string) => {
+    if (
+      !URL.canParse(value) ||
+      !["https:", "http:"].includes(new URL(value).protocol)
+    )
+      throw new Error(`Invalid URL: ${label}`);
+  };
+  for (const key of [
+    "name",
+    "shortName",
+    "headline",
+    "summary",
+    "location",
+  ] as const)
+    text(content.profile[key], `profile.${key}`);
+  content.profile.socialLinks.forEach((link) => {
+    text(link.label, "social label");
+    url(link.href, "social href");
   });
-
-  currentProfile.socialLinks.forEach((link, index) => {
-    requireText(link.label, `profile.socialLinks[${index}].label`);
-    if (!URL.canParse(link.href)) {
-      throw new Error(`Invalid portfolio URL: profile.socialLinks[${index}].href`);
+  url(content.site.url, "site.url");
+  unique(
+    content.work.map((work) => work.id),
+    "work ID",
+  );
+  unique(
+    content.work.flatMap((work) => (work.story ? [work.story.slug] : [])),
+    "story slug",
+  );
+  const ids = new Set(content.work.map((work) => work.id));
+  const references = (values: string[], label: string) => {
+    list(values, label);
+    unique(values, label);
+    values.forEach((id) => {
+      if (!ids.has(id)) throw new Error(`Unknown work reference: ${id}`);
+    });
+  };
+  content.work.forEach((work) => {
+    for (const key of ["company", "role", "period", "summary"] as const)
+      text(work[key], `${work.id}.${key}`);
+    list(work.achievements, `${work.id}.achievements`);
+    list(work.technologies, `${work.id}.technologies`);
+    unique(
+      work.metrics.map((metric) => metric.id),
+      "metric ID",
+    );
+    work.metrics.forEach((metric) => {
+      text(metric.value, "metric.value");
+      text(metric.label, "metric.label");
+    });
+    if (work.story) {
+      for (const key of ["slug", "title", "context", "challenge"] as const)
+        text(work.story[key], `story.${key}`);
+      if (
+        !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(work.story.slug) ||
+        work.story.slug === "fintech-architecture"
+      )
+        throw new Error("Invalid or reserved story slug");
+      list(work.story.decisions, "story.decisions");
+      list(work.story.quality, "story.quality");
+      list(work.outcomes, "outcomes");
     }
   });
-
-  if (!currentExperiences.length) throw new Error("Missing portfolio content: experiences");
-  currentExperiences.forEach((experience, index) => {
-    const label = `experiences[${index}]`;
-    requireText(experience.company, `${label}.company`);
-    requireText(experience.role, `${label}.role`);
-    requireText(experience.period, `${label}.period`);
-    requireText(experience.summary, `${label}.summary`);
-    requireList(experience.achievements, `${label}.achievements`);
-    requireList(experience.technologies, `${label}.technologies`);
+  references(content.featuredWork, "featuredWork");
+  references(content.cv.workIds, "cv.workIds");
+  content.featuredWork.forEach((id) => {
+    if (!content.work.find((work) => work.id === id)?.story)
+      throw new Error(`Featured work needs a story: ${id}`);
   });
-
-  if (!currentSkillGroups.length) throw new Error("Missing portfolio content: skillGroups");
-  currentSkillGroups.forEach((group, index) => {
-    const label = `skillGroups[${index}]`;
-    requireText(group.title, `${label}.title`);
-    requireText(group.description, `${label}.description`);
-    requireList(group.skills, `${label}.skills`);
+  content.skillGroups.forEach((group) => {
+    text(group.title, "skill title");
+    list(group.skills, "skills");
   });
-
-  if (!currentThemes.length) throw new Error("Missing portfolio content: systemDesignThemes");
-  currentThemes.forEach((theme, index) => {
-    const label = `systemDesignThemes[${index}]`;
-    requireText(theme.id, `${label}.id`);
-    requireText(theme.number, `${label}.number`);
-    requireText(theme.title, `${label}.title`);
-    requireText(theme.description, `${label}.description`);
-    requireText(theme.evidence, `${label}.evidence`);
-    requireList(theme.technologies, `${label}.technologies`);
-  });
-
-  const slugs = new Set<string>();
-  currentCaseStudies.forEach((item, index) => {
-    const label = `caseStudies[${index}]`;
-    requireText(item.slug, `${label}.slug`);
-    requireText(item.eyebrow, `${label}.eyebrow`);
-    requireText(item.title, `${label}.title`);
-    requireText(item.summary, `${label}.summary`);
-    requireText(item.context, `${label}.context`);
-    requireText(item.challenge, `${label}.challenge`);
-    requireText(item.disclaimer, `${label}.disclaimer`);
-    requireList(item.approach, `${label}.approach`);
-    requireList(item.outcomes, `${label}.outcomes`);
-    requireList(item.technologies, `${label}.technologies`);
-    if (!item.metrics.length) throw new Error(`Missing portfolio content: ${label}.metrics`);
-    item.metrics.forEach((metric, metricIndex) => {
-      requireText(metric.value, `${label}.metrics[${metricIndex}].value`);
-      requireText(metric.label, `${label}.metrics[${metricIndex}].label`);
+  unique(
+    content.systemDesignThemes.map((theme) => theme.id),
+    "theme ID",
+  );
+  content.systemDesignThemes.forEach((theme) => {
+    references(theme.workIds, "theme.workIds");
+    text(theme.title, "theme.title");
+    text(theme.description, "theme.description");
+    theme.workIds.forEach((id) => {
+      if (!content.work.find((work) => work.id === id)?.story)
+        throw new Error(`Expertise reference needs a story: ${id}`);
     });
-    if (slugs.has(item.slug)) throw new Error(`Duplicate case-study slug: ${item.slug}`);
-    slugs.add(item.slug);
+  });
+  list(content.profile.longSummary, "profile.longSummary");
+  Object.entries(content.profile.education).forEach(([key, value]) =>
+    text(value, `education.${key}`),
+  );
+  content.profile.spokenLanguages.forEach((item) => {
+    text(item.language, "language");
+    text(item.proficiency, "proficiency");
+  });
+  const validateCopy = (value: unknown, label: string) => {
+    if (typeof value === "object" && value !== null)
+      Object.entries(value).forEach(([key, item]) =>
+        validateCopy(item, `${label}.${key}`),
+      );
+    else text(value, label);
+  };
+  validateCopy(content.copy, "copy");
+  for (const key of ["cvPath", "portraitPath", "socialImagePath"] as const) {
+    if (
+      !/^\/(?!\/)[^?#]+$/.test(content.site[key]) ||
+      content.site[key].includes("..")
+    )
+      throw new Error(`Invalid asset path: ${key}`);
+  }
+  for (const count of [
+    content.cv.featuredBulletLimit,
+    content.cv.earlierBulletLimit,
+  ]) {
+    if (!Number.isInteger(count) || count < 1)
+      throw new Error("CV bullet limits must be positive integers");
+  }
+  if (!content.profile.socialLinks.some((link) => link.kind === "linkedin"))
+    throw new Error("Missing LinkedIn contact");
+  const paths = Object.values(content.pages).map((page) => page.path);
+  unique(paths, "page path");
+  Object.values(content.pages).forEach((page) => {
+    text(page.title, "page title");
+    text(page.heading, "page heading");
+    text(page.description, "page description");
+  });
+  content.navigation.forEach((link) => {
+    text(link.label, "navigation label");
+    if (!paths.includes(link.to))
+      throw new Error(`Unknown navigation path: ${link.to}`);
   });
 }
-
-validateContent(portfolioContent);
+validateContent(portfolio);

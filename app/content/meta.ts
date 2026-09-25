@@ -1,7 +1,8 @@
+import { portfolio } from "./portfolio";
 import type { MetaDescriptor } from "react-router";
 
-const siteUrl = "https://zanglmartin.github.io/";
-const socialImageUrl = `${siteUrl}og.png`;
+const siteUrl = portfolio.site.url;
+const socialImageUrl = new URL(portfolio.site.socialImagePath, siteUrl).href;
 
 interface PageMeta {
   title: string;
@@ -16,7 +17,10 @@ export function createPageMeta({
   path = "",
   type = "website",
 }: PageMeta): MetaDescriptor[] {
-  const canonical = new URL(path.replace(/^\//, ""), siteUrl).toString();
+  const canonical = new URL(
+    path === "/" ? "" : `${path.replace(/^\/|\/$/g, "")}/`,
+    siteUrl,
+  ).toString();
 
   return [
     { title },

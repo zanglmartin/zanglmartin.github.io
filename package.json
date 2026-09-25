@@ -8,15 +8,16 @@
   },
   "scripts": {
     "dev": "react-router dev",
-    "build": "react-router build",
-    "build:pages": "GITHUB_PAGES=true react-router build && node scripts/prepare-pages.mjs",
+    "build": "npm run generate && react-router build",
+    "build:pages": "npm run generate && GITHUB_PAGES=true react-router build && node scripts/prepare-pages.mjs",
     "preview": "node scripts/serve-pages.mjs",
     "typecheck": "react-router typegen && tsc",
     "lint": "eslint .",
     "test:static": "node --import tsx --test tests/portfolio.test.mjs tests/content-validation.test.ts",
     "test:e2e": "playwright test",
-    "test:live": "node scripts/smoke-live.mjs",
-    "test": "npm run build:pages && npm run test:static && npm run test:e2e"
+    "test:live": "node --import tsx scripts/smoke-live.mjs",
+    "test": "npm run build:pages && npm run test:static && npm run test:e2e",
+    "generate": "node --import tsx scripts/generate-content.ts"
   },
   "dependencies": {
     "@react-router/node": "8.3.0",

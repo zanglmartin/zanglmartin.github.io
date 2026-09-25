@@ -1,22 +1,35 @@
 import { Link } from "react-router";
-import type { CaseStudy } from "../content/types";
-
-export function CaseStudyCard({ caseStudy, index }: { caseStudy: CaseStudy; index: number }) {
+import { portfolio, type StoryWork } from "../content/portfolio";
+export function CaseStudyCard({
+  caseStudy: work,
+  index,
+}: {
+  caseStudy: StoryWork;
+  index: number;
+}) {
   return (
     <article className="case-card">
       <div className="case-card-top">
         <span>{String(index + 1).padStart(2, "0")}</span>
-        <span>{caseStudy.eyebrow}</span>
+        <span>{work.client ?? work.company}</span>
+        <span>{work.period}</span>
       </div>
-      <h3>{caseStudy.title}</h3>
-      <p>{caseStudy.summary}</p>
-      <div className="case-metrics">
-        {caseStudy.metrics.map((metric) => (
-          <div key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></div>
-        ))}
-      </div>
-      <Link className="text-link" to={`/case-studies/${caseStudy.slug}`}>
-        Read the case study <span aria-hidden="true">→</span>
+      <h3>
+        <Link to={`/case-studies/${work.story.slug}`}>{work.story.title}</Link>
+      </h3>
+      <p>{work.summary}</p>
+      {work.metrics.length > 0 && (
+        <div className="case-metrics">
+          {work.metrics.map((metric) => (
+            <div key={metric.id}>
+              <strong>{metric.value}</strong>
+              <span>{metric.label}</span>
+            </div>
+          ))}
+        </div>
+      )}
+      <Link className="text-link" to={`/case-studies/${work.story.slug}`}>
+        {portfolio.copy.readStory} <span aria-hidden="true">↗</span>
       </Link>
     </article>
   );

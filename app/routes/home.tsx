@@ -1,97 +1,109 @@
-import type { MetaFunction } from "react-router";
-import { Link, useHref } from "react-router";
+import { Link } from "react-router";
 import { CaseStudyCard } from "../components/CaseStudyCard";
-import { caseStudies } from "../content/caseStudies";
+import { portfolio as p, caseStudies, workById } from "../content/portfolio";
 import { createPageMeta } from "../content/meta";
-import { profile } from "../content/profile";
-import { skillGroups, systemDesignThemes } from "../content/skills";
-import "../content/validate";
-
-export const meta: MetaFunction = () => createPageMeta({
-  title: "Martin Zangl | Senior Android & Mobile Engineer",
-  description: "Senior Android and mobile engineer building reliable products and SDKs across fintech, healthcare, and IoT.",
-});
-
+export const meta = () => createPageMeta(p.pages.home);
 export default function Home() {
-  const avatarHref = useHref("/images/martin-zangl.webp");
-  const cvHref = useHref("/cv/martin-zangl-cv-2026.pdf");
-  const primarySkills = skillGroups.slice(0, 3).flatMap((group) => group.skills).slice(0, 10);
-
   return (
     <>
       <section className="hero">
-        <div className="hero-copy-block">
-          <span className="section-kicker"><i /> {profile.location} · Mobile engineering</span>
-          <h1>Reliable mobile systems, built for the <em>real world.</em></h1>
-          <p>{profile.summary}</p>
+        <div>
+          <span className="section-kicker">
+            {p.pages.home.eyebrow} · {p.profile.location}
+          </span>
+          <h1>{p.pages.home.heading}</h1>
+          <p>{p.profile.summary}</p>
           <div className="hero-actions">
-            <Link className="button button-primary" to="/case-studies">Explore my impact <span aria-hidden="true">→</span></Link>
-            <a className="button button-secondary" href={cvHref} download>Download CV</a>
+            <Link className="button button-primary" to="/case-studies">
+              {p.copy.exploreWork} <span aria-hidden="true">↗</span>
+            </Link>
+            <a
+              className="button button-secondary"
+              href={p.site.cvPath}
+              download
+            >
+              {p.copy.cvLabel}
+            </a>
           </div>
         </div>
-
-        <div className="portrait-panel">
-          <div className="portrait-frame">
-            <img src={avatarHref} alt="Martin Zangl" width="520" height="520" />
-            <div className="portrait-scanline" aria-hidden="true" />
-          </div>
-          <div className="portrait-caption">
-            <span>Senior Android<br />&amp; Mobile Engineer</span>
-            <span>15+ years<br />shipping software</span>
-          </div>
-        </div>
+        <figure className="portrait-panel">
+          <img
+            src={p.site.portraitPath}
+            alt={p.profile.shortName}
+            width="520"
+            height="520"
+          />
+          <figcaption>
+            {p.profile.shortName}
+            <span>{p.profile.headline}</span>
+          </figcaption>
+        </figure>
       </section>
-
-      <section className="business-strip" aria-label="Business experience across industries">
-        {profile.businessAreas.map((area) => (
-          <article key={area.name}>
-            <strong>{area.name}</strong>
-            <div><span>{area.focus}</span><small>{area.detail}</small></div>
-          </article>
-        ))}
-      </section>
-
       <section className="home-section">
-        <div className="section-heading split-heading">
-          <div>
-            <span className="section-kicker">What I solve</span>
-            <h2>Architecture is only useful when it improves delivery.</h2>
-          </div>
-          <p>I connect deep mobile engineering with product outcomes: stability, performance, safe change, and consistent platform behavior.</p>
+        <div className="section-heading">
+          <span className="section-kicker">01 / {p.copy.selectedWork}</span>
+          <h2>{p.pages.stories.heading}</h2>
+          <p>{p.pages.stories.description}</p>
+        </div>
+        <div className="case-grid">
+          {caseStudies.map((work, index) => (
+            <CaseStudyCard key={work.id} caseStudy={work} index={index} />
+          ))}
+        </div>
+      </section>
+      <section className="home-section">
+        <div className="section-heading">
+          <span className="section-kicker">
+            02 / {p.pages.expertise.eyebrow}
+          </span>
+          <h2>{p.copy.expertiseHeading}</h2>
         </div>
         <div className="design-theme-grid">
-          {systemDesignThemes.slice(0, 4).map((theme) => (
+          {p.systemDesignThemes.slice(0, 4).map((theme) => (
             <article key={theme.id}>
               <span className="theme-number">{theme.number}</span>
               <h3>{theme.title}</h3>
               <p>{theme.description}</p>
-              <small>{theme.evidence}</small>
+              <div className="evidence-links">
+                {theme.workIds.map((id) => {
+                  const work = workById(id);
+                  return (
+                    <Link key={id} to={`/case-studies/${work.story!.slug}`}>
+                      {work.client ?? work.company} ↗
+                    </Link>
+                  );
+                })}
+              </div>
             </article>
           ))}
         </div>
-        <Link className="text-link section-link" to="/expertise">See the complete expertise map <span aria-hidden="true">→</span></Link>
+        <Link className="text-link section-link" to="/expertise">
+          {p.copy.exploreExpertise} →
+        </Link>
       </section>
-
-      <section className="home-section cases-home">
+      <section className="home-section">
         <div className="section-heading">
-          <span className="section-kicker">Selected work</span>
-          <h2>Complex systems.<br />Clear outcomes.</h2>
+          <span className="section-kicker">
+            03 / {p.pages.experience.eyebrow}
+          </span>
+          <h2>{p.copy.careerHeading}</h2>
         </div>
-        <div className="case-grid">
-          {caseStudies.map((caseStudy, index) => (
-            <CaseStudyCard key={caseStudy.slug} caseStudy={caseStudy} index={index} />
-          ))}
+        <div className="career-list">
+          {p.work
+            .filter((work) => work.story)
+            .slice(0, 4)
+            .map((work) => (
+              <Link key={work.id} to={`/case-studies/${work.story!.slug}`}>
+                <strong>{work.client ?? work.company}</strong>
+                <span>{work.role}</span>
+                <small>{work.period}</small>
+                <span aria-hidden="true">↗</span>
+              </Link>
+            ))}
         </div>
-      </section>
-
-      <section className="stack-band">
-        <div>
-          <span className="section-kicker">Core stack</span>
-          <h2>Mobile-first.<br />Platform-aware.</h2>
-        </div>
-        <div className="stack-cloud">
-          {primarySkills.map((skill) => <span key={skill}>{skill}</span>)}
-        </div>
+        <Link className="text-link section-link" to="/experience">
+          {p.copy.fullExperience} →
+        </Link>
       </section>
     </>
   );

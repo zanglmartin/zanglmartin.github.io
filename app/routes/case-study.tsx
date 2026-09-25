@@ -1,60 +1,121 @@
 import type { MetaFunction } from "react-router";
 import { Link, useParams } from "react-router";
-import { getCaseStudy } from "../content/caseStudies";
+import { portfolio as p, getCaseStudy, workById } from "../content/portfolio";
 import { createPageMeta } from "../content/meta";
-
 export const meta: MetaFunction = ({ params }) => {
-  const caseStudy = getCaseStudy(params.slug);
-  if (!caseStudy) return [{ title: "Case study not found | Martin Zangl" }];
-  return createPageMeta({
-    title: `${caseStudy.title} | Martin Zangl`,
-    description: caseStudy.summary,
-    path: `case-studies/${caseStudy.slug}/`,
-    type: "article",
-  });
+  const work = getCaseStudy(params.slug);
+  if (params.slug === "fintech-architecture")
+    return createPageMeta(p.pages.legacy);
+  return work
+    ? createPageMeta({
+        title: `${work.story.title} | ${p.profile.shortName}`,
+        description: work.summary,
+        path: `/case-studies/${work.story.slug}/`,
+        type: "article",
+      })
+    : [{ title: `Story not found | ${p.profile.shortName}` }];
 };
-
-export default function CaseStudyDetail() {
+export default function CaseStudy() {
   const { slug } = useParams();
-  const caseStudy = getCaseStudy(slug);
-
-  if (!caseStudy) {
+  const work = getCaseStudy(slug);
+  if (slug === "fintech-architecture")
     return (
-      <section className="error-page">
-        <span className="section-kicker">Case study not found</span>
-        <h1>This story is not available.</h1>
-        <Link className="button button-primary" to="/case-studies">View all case studies</Link>
+      <section className="page-intro legacy-intro">
+        <span className="section-kicker">{p.pages.legacy.eyebrow}</span>
+        <h1>{p.pages.legacy.heading}</h1>
+        <p>{p.pages.legacy.description}</p>
+        <div className="hero-actions">
+          {["paypal", "mercadolibre"].map((id) => {
+            const w = workById(id);
+            return (
+              <Link
+                className="button button-secondary"
+                key={id}
+                to={`/case-studies/${w.story!.slug}`}
+              >
+                {w.company} ↗
+              </Link>
+            );
+          })}
+        </div>
       </section>
     );
-  }
-
+  if (!work)
+    return (
+      <section className="error-page">
+        <h1>This story is not available.</h1>
+        <Link to="/case-studies">View all case studies</Link>
+      </section>
+    );
+  const sections = p.copy.sections;
   return (
     <article className="case-detail">
       <header className="case-detail-header">
-        <Link className="back-link" to="/case-studies"><span aria-hidden="true">←</span> All case studies</Link>
-        <span className="section-kicker">{caseStudy.eyebrow}</span>
-        <h1>{caseStudy.title}</h1>
-        <p>{caseStudy.summary}</p>
-        <div className="case-detail-metrics">
-          {caseStudy.metrics.map((metric) => (
-            <div key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></div>
-          ))}
-        </div>
+        <Link className="back-link" to="/case-studies">
+          ← {p.copy.allStories}
+        </Link>
+        <span className="section-kicker">
+          {work.client ?? work.company} / {work.period}
+        </span>
+        <h1>{work.story.title}</h1>
+        <p>{work.summary}</p>
+        <p className="work-role">
+          {work.role}
+          {work.client ? ` · ${work.company} contractor` : ""}
+        </p>
+        {work.metrics.length > 0 && (
+          <div className="case-detail-metrics">
+            {work.metrics.map((metric) => (
+              <div key={metric.id}>
+                <strong>{metric.value}</strong>
+                <span>{metric.label}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </header>
-
       <div className="case-detail-body">
         <aside>
-          <span className="section-kicker">Technology</span>
-          <div className="technology-stack">
-            {caseStudy.technologies.map((technology) => <span key={technology}>{technology}</span>)}
-          </div>
+          <nav className="contents" aria-label="Story sections">
+            {Object.entries(sections).map(([id, label], i) => (
+              <a href={`#${id}`} key={id}>
+                <span>{String(i + 1).padStart(2, "0")}</span>
+                {label}
+              </a>
+            ))}
+          </nav>
         </aside>
         <div className="case-narrative">
-          <section><span className="case-section-number">01</span><h2>Context</h2><p>{caseStudy.context}</p></section>
-          <section><span className="case-section-number">02</span><h2>Challenge</h2><p>{caseStudy.challenge}</p></section>
-          <section><span className="case-section-number">03</span><h2>Approach</h2><ol>{caseStudy.approach.map((item) => <li key={item}>{item}</li>)}</ol></section>
-          <section><span className="case-section-number">04</span><h2>Outcome</h2><ul className="outcome-list">{caseStudy.outcomes.map((item) => <li key={item}>{item}</li>)}</ul></section>
-          <p className="case-disclaimer">{caseStudy.disclaimer}</p>
+          <section id="context">
+            <h2>{sections.context}</h2>
+            <p>{work.story.context}</p>
+            <p>{work.story.challenge}</p>
+          </section>
+          {(
+            [
+              ["ownership", work.achievements],
+              ["decisions", work.story.decisions],
+              ["quality", work.story.quality],
+              ["outcomes", work.outcomes],
+            ] as const
+          ).map(([key, items]) => (
+            <section id={key} key={key}>
+              <h2>{sections[key]}</h2>
+              <ul>
+                {items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </section>
+          ))}
+          <section id="technology">
+            <h2>{sections.technology}</h2>
+            <div className="technology-row">
+              {work.technologies.map((tech) => (
+                <span key={tech}>{tech}</span>
+              ))}
+            </div>
+          </section>
         </div>
       </div>
     </article>

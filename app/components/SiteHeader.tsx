@@ -1,13 +1,9 @@
+import { portfolio as p, linkedin } from "../content/portfolio";
 import { useEffect, useRef, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { ThemeToggle } from "./ThemeToggle";
 
-const links = [
-  { to: "/about", label: "About" },
-  { to: "/experience", label: "Experience" },
-  { to: "/expertise", label: "Expertise" },
-  { to: "/case-studies", label: "Case studies" },
-];
+const links = p.navigation;
 
 export function SiteHeader() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,9 +24,14 @@ export function SiteHeader() {
   return (
     <header className="site-header">
       <div className="header-inner">
-        <Link className="brand" to="/" aria-label="Martin Zangl home" onClick={() => setIsOpen(false)}>
+        <Link
+          className="brand"
+          to="/"
+          aria-label={`${p.profile.shortName} home`}
+          onClick={() => setIsOpen(false)}
+        >
           <span className="brand-mark">MZ</span>
-          <span className="brand-name">Martin Zangl</span>
+          <span className="brand-name">{p.profile.shortName}</span>
         </Link>
 
         <button
@@ -44,19 +45,30 @@ export function SiteHeader() {
           <span>{isOpen ? "Close" : "Menu"}</span>
         </button>
 
-        <nav id="primary-navigation" className={isOpen ? "primary-nav is-open" : "primary-nav"} aria-label="Primary navigation">
+        <nav
+          id="primary-navigation"
+          className={isOpen ? "primary-nav is-open" : "primary-nav"}
+          aria-label="Primary navigation"
+        >
           {links.map((link) => (
             <NavLink
               key={link.to}
               to={link.to}
               onClick={() => setIsOpen(false)}
-              className={({ isActive }) => isActive ? "nav-item is-active" : "nav-item"}
+              className={({ isActive }) =>
+                isActive ? "nav-item is-active" : "nav-item"
+              }
             >
               {link.label}
             </NavLink>
           ))}
-          <a className="nav-contact" href="https://www.linkedin.com/in/martinzangl/" target="_blank" rel="noreferrer">
-            Connect <span aria-hidden="true">↗</span>
+          <a
+            className="nav-contact"
+            href={linkedin.href}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {p.copy.connect} <span aria-hidden="true">↗</span>
           </a>
           <ThemeToggle />
         </nav>

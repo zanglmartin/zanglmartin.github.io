@@ -1,17 +1,10 @@
-const baseUrl = process.env.PORTFOLIO_BASE_URL ?? "https://zanglmartin.github.io/";
-const routes = [
-  "",
-  "about/",
-  "experience/",
-  "expertise/",
-  "case-studies/",
-  "case-studies/mobile-reliability/",
-  "case-studies/payment-sdks/",
-  "case-studies/fintech-architecture/",
-];
+import { routeManifest, canonicalPath } from "../app/content/routes.ts";
+import { portfolio } from "../app/content/portfolio.ts";
+const baseUrl = process.env.PORTFOLIO_BASE_URL ?? portfolio.site.url;
+const routes = routeManifest.map((route) => canonicalPath(route.path).slice(1));
 const assets = [
-  "cv/martin-zangl-cv-2026.pdf",
-  "images/martin-zangl.webp",
+  portfolio.site.cvPath.slice(1),
+  portfolio.site.portraitPath.slice(1),
   "og.png",
   "sitemap.xml",
   "robots.txt",
@@ -25,10 +18,15 @@ async function verifyTarget(target) {
 
   const contentType = response.headers.get("content-type") ?? "";
   if (routes.includes(target)) {
-    if (!contentType.includes("text/html")) throw new Error(`${url} did not return HTML`);
+    if (!contentType.includes("text/html"))
+      throw new Error(`${url} did not return HTML`);
     const html = await response.text();
-    if (!html.includes("Martin Zangl")) throw new Error(`${url} did not contain portfolio content`);
-  } else if (target.endsWith(".pdf") && !contentType.includes("application/pdf")) {
+    if (!html.includes(portfolio.profile.shortName))
+      throw new Error(`${url} did not contain portfolio content`);
+  } else if (
+    target.endsWith(".pdf") &&
+    !contentType.includes("application/pdf")
+  ) {
     throw new Error(`${url} did not return a PDF`);
   } else if (target.endsWith(".webp") && !contentType.includes("image/webp")) {
     throw new Error(`${url} did not return a WebP image`);
@@ -45,7 +43,9 @@ for (let attempt = 1; attempt <= attempts; attempt += 1) {
     process.exit(0);
   } catch (error) {
     if (attempt === attempts) throw error;
-    console.log(`Live site is not ready yet (${attempt}/${attempts}); retrying in 8 seconds.`);
+    console.log(
+      `Live site is not ready yet (${attempt}/${attempts}); retrying in 8 seconds.`,
+    );
     await new Promise((resolve) => setTimeout(resolve, 8_000));
   }
 }

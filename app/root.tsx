@@ -1,3 +1,4 @@
+import { portfolio } from "./content/portfolio";
 import {
   Links,
   Link,
@@ -25,23 +26,27 @@ const themeScript = `
 `;
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  const avatarHref = useHref("/images/martin-zangl.webp");
+  const avatarHref = useHref(portfolio.site.portraitPath);
 
   return (
-    <html lang="en" data-theme="dark" suppressHydrationWarning>
+    <html lang="en" data-theme="light" suppressHydrationWarning>
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#08110D" />
+        <meta name="theme-color" content="#f8f6f1" />
         <link rel="icon" type="image/webp" href={avatarHref} />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <Meta />
         <Links />
       </head>
       <body>
-        <a className="skip-link" href="#main-content">Skip to content</a>
+        <a className="skip-link" href="#main-content">
+          Skip to content
+        </a>
         <SiteHeader />
-        <main id="main-content" tabIndex={-1}>{children}</main>
+        <main id="main-content" tabIndex={-1}>
+          {children}
+        </main>
         <SiteFooter />
         <ScrollRestoration />
         <Scripts />
@@ -59,8 +64,12 @@ export function ErrorBoundary() {
     <section className="error-page">
       <span className="section-kicker">404 · Route not found</span>
       <h1>This page took a wrong turn.</h1>
-      <p>The portfolio is still here. Use the navigation to get back on track.</p>
-      <Link className="button button-primary" to="/">Return home</Link>
+      <p>
+        The portfolio is still here. Use the navigation to get back on track.
+      </p>
+      <Link className="button button-primary" to="/">
+        Return home
+      </Link>
     </section>
   );
 }

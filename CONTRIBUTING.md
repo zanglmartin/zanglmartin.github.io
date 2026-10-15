@@ -1,19 +1,76 @@
 # Maintaining the portfolio
 
-Edit **app/content/portfolio.json**. It is the source for the website, downloadable CV, and generated portfolio section of README.md. The original Obsidian stories were migration inputs; neither the vault nor an export step is required.
+`app/content/portfolio.json` is the source for the website, the generated section of `README.md`, and the public CV. The original Obsidian notes were migration inputs and are no longer part of the build.
 
-Use Node 24 or newer and Python 3.11 or newer. Install dependencies with `npm ci` and `python3 -m pip install -r scripts/requirements.txt` (prefer a virtual environment). Install Chromium once with `npx playwright install chromium` for social-card generation and browser tests. Set `PYTHON` if your Python executable has another path.
+Use Node 24 or newer and Python 3.11 or newer. Install the JavaScript dependencies with `npm ci`. Install the PDF dependency with `python3 -m pip install -r scripts/requirements.txt`, preferably in a virtual environment. Install Chromium once with `npx playwright install chromium`. Set `PYTHON` when the Python executable has a different path.
 
-## Content structure
+## 1. Edit the source content
 
-- `profile`, `site`, `pages`, `navigation`, and `copy` own shared identity, destinations, and presentation text.
-- `work` contains career entries in reverse chronological order. Keep IDs stable. A `story` adds context, challenge, decisions, and validation to the shared ownership (`achievements`), outcomes, and technologies.
-- `metrics` belong to a work record and are optional. Update their value here; never copy measurements into separately maintained prose.
-- `featuredWork`, expertise `workIds`, and `cv.workIds` select existing records by ID. CV bullet limits choose how many existing contributions to include.
-- Case study sections share a template. Describe contributions accurately when shipment or measurement is not established. Do not add interview prompts or speculative metrics.
+Make career and portfolio changes in `app/content/portfolio.json`.
 
-Run `npm run generate` after editing. This validates content and generates the PDF, social preview PNGs, sitemap, robots.txt, and the marked README section. The same step runs during both builds. Do not edit generated outputs directly. Text outside the README markers remains editable.
+- `profile`, `site`, `pages`, `navigation`, and `copy` contain shared identity and page text.
+- `work` contains career entries in reverse chronological order. Keep each `id` stable.
+- A `story` contains the context, challenge, decisions, and validation for a case study.
+- `metrics` belong to a work record. Change a measurement once at its source instead of copying it into separate prose.
+- `featuredWork`, expertise `workIds`, and `cv.workIds` refer to existing work IDs.
+- The CV bullet limits select existing contributions. The PDF generator does not maintain a separate career history.
 
-Run `npm run typecheck`, `npm run lint`, and `npm test` before committing. Tests cover content integrity, generated routes and metadata, PDF text, privacy checks, mobile/desktop navigation, themes, and accessibility. Render the CV with `pdftoppm -png public/cv/martin-zangl-cv-2026.pdf /tmp/portfolio-cv` and inspect every page after layout or content changes.
+## 2. Generate the public artifacts
 
-`npm run dev` starts development; `npm run preview` serves the GitHub Pages build. The existing workflow deploys merges to main and checks live routes afterward. The legacy combined fintech URL remains a landing page for the separate PayPal and MercadoLibre stories.
+Run:
+
+```sh
+npm run generate
+```
+
+This command validates the content and regenerates:
+
+- the marked portfolio section in `README.md`
+- `public/cv/martin-zangl-cv-2026.pdf`
+- the social preview image
+- `public/sitemap.xml`
+- `public/robots.txt`
+
+Do not edit those generated files directly. Text outside the generated markers in `README.md` remains hand-editable.
+
+## 3. Validate code and content
+
+Run all checks with Node 24:
+
+```sh
+npm run typecheck
+npm run lint
+npm test
+```
+
+The tests cover content references, generated routes and metadata, source propagation, PDF text and page count, privacy, mobile and desktop navigation, themes, and accessibility.
+
+## 4. Review the results
+
+Use `npm run dev` during editing. Use `npm run preview` to inspect the GitHub Pages build produced by the test or build command.
+
+Review these pages on desktop and mobile:
+
+- Home
+- About
+- Experience
+- Expertise
+- all four case studies
+
+Render and inspect both pages of the public CV after any content or layout change:
+
+```sh
+pdftoppm -png public/cv/martin-zangl-cv-2026.pdf /tmp/portfolio-cv
+```
+
+The existing GitHub Actions workflow uses Node 24, builds the GitHub Pages output, deploys merges to `main`, and checks the live routes afterward. The legacy fintech URL remains a landing page for the separate PayPal and MercadoLibre case studies.
+
+## Editorial rules
+
+- Publish facts that can be supported by the career notes or confirmed production work.
+- Use a metric only when its value and meaning have been confirmed.
+- Describe internal systems by their function. Do not publish internal codenames.
+- Keep the public CV free of phone numbers, email addresses, citizenship, and other private identity details.
+- Use direct first-person language. Begin with the problem, contribution, or result.
+- Prefer concrete product behavior over promotional claims and generic adjectives.
+- Keep job titles, dates, technologies, and outcomes consistent across the site, README, and PDF.

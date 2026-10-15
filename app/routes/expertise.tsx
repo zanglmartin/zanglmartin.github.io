@@ -32,7 +32,6 @@ export default function Expertise() {
           {skillGroups.map((group) => (
             <article key={group.title}>
               <div className="skill-group-head">
-                <span>{group.level}</span>
                 <h3>{group.title}</h3>
               </div>
               <p>{group.description}</p>

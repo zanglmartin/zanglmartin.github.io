@@ -15,6 +15,21 @@ import { getDocument } from "pdfjs-dist/legacy/build/pdf.mjs";
 const fixture = () => structuredClone(portfolioContent);
 test("production records validate, including stories without metrics", () =>
   assert.doesNotThrow(() => validateContent(fixture())));
+for (const legacy of [
+  "Senior Mobile Engineer",
+  "Dec 2025",
+  "Apache Spark",
+  "Andes",
+  "FLEX",
+  "The public sample was not published",
+  "The two releases were not shipped",
+]) {
+  test(`rejects legacy portfolio wording: ${legacy}`, () => {
+    const p = fixture();
+    p.profile.summary = legacy;
+    assert.throws(() => validateContent(p), /Legacy portfolio content/);
+  });
+}
 for (const [name, mutate, error] of [
   [
     "missing dates",
@@ -119,6 +134,7 @@ test("one metric and role edit propagate to web, README and PDF", async () => {
       useSystemFonts: true,
     });
     const pdf = await task.promise;
+    assert.equal(pdf.numPages, 2);
     let text = "";
     for (let n = 1; n <= pdf.numPages; n++) {
       const page = await pdf.getPage(n);
@@ -129,6 +145,8 @@ test("one metric and role edit propagate to web, README and PDF", async () => {
     }
     assert.match(text, /98\.765%/);
     assert.match(text, /Example Clinical Team/);
+    assert.match(text, /Senior Android Engineer/);
+    assert.match(text, /Nov 2025 - Jul 2026/);
     await task.destroy();
   } finally {
     await rm(directory, { recursive: true, force: true });

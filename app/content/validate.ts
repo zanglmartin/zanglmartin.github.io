@@ -23,6 +23,21 @@ export function validateContent(content: PortfolioContent) {
     )
       throw new Error(`Invalid URL: ${label}`);
   };
+  const serialized = JSON.stringify(content);
+  const legacyContent = [
+    /Senior Mobile Engineer/,
+    /Dec 2025/,
+    /Apache Spark/,
+    /\bAndes\b/,
+    /\bFLEX\b/,
+    /public sample[^.]{0,80}(?:not published|not claimed)/i,
+    /releases?[^.]{0,80}(?:not published|not shipped|not claimed)/i,
+    /publication of the public sample/i,
+  ];
+  for (const pattern of legacyContent) {
+    if (pattern.test(serialized))
+      throw new Error(`Legacy portfolio content: ${pattern.source}`);
+  }
   for (const key of [
     "name",
     "shortName",

@@ -8,12 +8,15 @@ export function renderReadme(content: typeof p) {
   const works = content.featuredWork.map((id) =>
     content.work.find((work) => work.id === id)!,
   );
-  return `# ${content.profile.shortName}\n\n### ${content.profile.headline}\n\n${content.profile.summary}\n\n[View portfolio](${content.site.url}) · ${content.profile.socialLinks
-    .filter((link) => link.kind !== "portfolio")
-    .map((link) => `[${link.label}](${link.href})`)
-    .join(
-      " · ",
-    )}\n\n## Selected engineering stories\n\n${works.map((work) => `- [${work.client ?? work.company}: ${work.story!.title}](${content.site.url}case-studies/${work.story!.slug}/) — ${work.summary}${work.metrics.length ? ` ${work.metrics.map((metric) => `${metric.label}: ${metric.value}`).join("; ")}.` : ""}`).join("\n")}\n\n${content.profile.location}\n`;
+  const linkedin = content.profile.socialLinks.find(
+    (link) => link.kind === "linkedin",
+  )!;
+  const github = content.profile.socialLinks.find(
+    (link) => link.kind === "github",
+  )!;
+  const focusAreas = content.systemDesignThemes.slice(0, 3);
+  const cvUrl = new URL(content.site.cvPath, content.site.url).href;
+  return `# ${content.profile.shortName}\n\n**${content.profile.headline} in ${content.profile.location}.**\n\nI have spent 12+ years building Android products and 15+ years in software. My recent work covers payment SDKs, offline synchronization, production reliability, and the native code behind cross-platform apps.\n\n[Portfolio](${content.site.url}) · [Public CV](${cvUrl}) · [LinkedIn](${linkedin.href}) · [GitHub](${github.href})\n\n## What I work on\n\n${focusAreas.map((area) => `- **${area.title}:** ${area.description}`).join("\n")}\n\n## Selected case studies\n\n${works.map((work) => `- **[${work.client ?? work.company}: ${work.story!.title}](${content.site.url}case-studies/${work.story!.slug}/)**\n  ${work.summary}${work.metrics.length ? ` ${work.metrics.map((metric) => `${metric.label}: ${metric.value}`).join(", ")}.` : ""}`).join("\n")}\n`;
 }
 if (process.argv[1]?.endsWith("generate-content.ts")) {
   const file = "README.md";

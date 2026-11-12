@@ -6,8 +6,8 @@
     "location": "Valencia, Spain",
     "summary": "I build and stabilize Android products, most recently payment SDKs and an offline-first clinical app. When the work crosses a platform boundary, I follow it into React Native, Flutter, iOS, or Java services.",
     "longSummary": [
-      "I have spent 12+ years building Android products and 15+ years in software. Recent work includes payment SDKs at Checkout.com and reliability work on Swift Medical's offline-first clinical app.",
-      "At Swift Medical, synchronization and memory changes helped move crash-free usage from about 70% to 99.6%. At PayPal and MercadoLibre, I worked on financial journeys that crossed mobile apps, testing, release trains, and Java middle-end services.",
+      "I have spent 13+ years building Android products. Recent work includes payment SDKs at Checkout.com and reliability work on Swift Medical's offline-first clinical app.",
+      "At Swift Medical I rebuilt synchronization and took crash-free users from about 70% to 99.6%. At PayPal and MercadoLibre, I worked on financial journeys that crossed mobile apps, testing, release trains, and Java middle-end services.",
       "I still write product code. I also mentor developers, review Android candidates, and share what I learn through internal sessions and community talks."
     ],
     "socialLinks": [
@@ -283,17 +283,17 @@
         {
           "id": "crash-free",
           "value": "≈70% → 99.6%",
-          "label": "Crash-free usage"
+          "label": "Crash-free users (Crashlytics)"
         },
         {
           "id": "memory",
           "value": "≈24%",
-          "label": "Lower memory consumption"
+          "label": "Lower memory use, whole-app over a full session"
         },
         {
           "id": "cpu",
           "value": "≈33%",
-          "label": "Better CPU utilization"
+          "label": "Lower CPU use, whole-app over a full session"
         }
       ],
       "outcomes": [
@@ -414,7 +414,7 @@
       }
     },
     {
-      "company": "Santex America",
+      "company": "Santex",
       "role": "Senior Android Engineer",
       "period": "May 2015 - Apr 2020",
       "summary": "Spent five years on Android products across IoT, education, social networking, and games.",
@@ -442,7 +442,7 @@
     },
     {
       "company": "Globant",
-      "role": "Android Engineer",
+      "role": "Semi-Senior Android Engineer",
       "period": "May 2014 - May 2015",
       "summary": "Shipped BBVA's Android app and moved JPMorgan Chase mobile-web applications to native Android.",
       "achievements": [
@@ -477,8 +477,8 @@
       "outcomes": []
     },
     {
-      "company": "Self-Employed",
-      "role": "Software Engineer",
+      "company": "Freelance",
+      "role": "Software Developer",
       "period": "Sep 2005 - Mar 2010",
       "summary": "Built custom software for small businesses and prototyped embedded and mobile products.",
       "achievements": [
@@ -529,7 +529,7 @@
       "path": "/about",
       "title": "About | Martin Zangl",
       "heading": "Android first, with enough range to follow the problem.",
-      "description": "I have spent 12+ years building Android products and 15+ years in software across payments, healthcare, IoT, education, social products, and games.",
+      "description": "I have spent 13+ years building Android products across payments, healthcare, IoT, education, social products, and games.",
       "eyebrow": "About"
     },
     "experience": {
